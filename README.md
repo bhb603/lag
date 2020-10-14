@@ -1,7 +1,5 @@
 # Lag
 
-A server that lags (on purpose).
-
 ## Get Started
 
 ```sh
@@ -34,4 +32,9 @@ I'm a teapot
 Download arbitrary amounts of data:
 ```sh
 curl http://localhost:8080/data?s=125MB -o data
+```
+
+View all request headers
+```sh
+curl http://localhost:8080/headers
 ```

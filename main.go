@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"flag"
+	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -96,6 +98,16 @@ func dataHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
+func headersHandler(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "Headers:\n")
+	for k, vals := range r.Header {
+		io.WriteString(w, fmt.Sprintf("\t%s", k))
+		for _, v := range vals {
+			io.WriteString(w, fmt.Sprintf("\t\t%s\n", v))
+		}
+	}
+}
+
 func healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(http.StatusText(http.StatusOK)))
 }
@@ -138,6 +150,7 @@ func main() {
 	r.HandleFunc("/", indexHandler).Methods("GET")
 	r.HandleFunc("/data", dataHandler).Methods("GET")
 	r.HandleFunc("/error/{status:[0-9]+}", errorHandler).Methods("GET")
+	r.HandleFunc("/headers", headersHandler)
 	r.HandleFunc("/health", healthHandler)
 	r.HandleFunc("/", notFoundHandler)
 	r.Use(parseParamsMiddleware)
