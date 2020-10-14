@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lag
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: lag
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: lag
+    spec:
+      containers:
+        - name: lag
+          image: bhb603/lag
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP

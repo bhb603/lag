@@ -1,0 +1,9 @@
+commonLabels:
+  app.kubernetes.io/name: lag
+resources:
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+images:
+  - name: bhb603/lag
+    newTag: 0.3.0
