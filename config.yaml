@@ -1,0 +1,4 @@
+server:
+  port: 8080
+  max_lag: 30s
+  max_data_size: 10mb

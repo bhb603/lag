@@ -9,21 +9,21 @@ docker-compose up -d
 
 ```sh
 curl http://localhost:8080/health
-OK
+{"status": "ok"}
 ```
 
 ## API
 
 Get a delayed response:
 ```sh
-curl http://localhost:8080/?t=10s
+curl http://localhost:8080/?lag=10s
 # 10s later
-OK
+ok
 ```
 
 Get 4xx and 5xx errors:
 ```sh
-curl -i http://localhost:8080/error/418?t=1s
+curl -i http://localhost:8080/error/418?lag=1s
 HTTP/1.1 418 I'm a teapot
 
 I'm a teapot
