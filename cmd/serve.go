@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"log"
 	"time"
 
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -23,7 +23,7 @@ var serveCommand = &cobra.Command{
 		if str := viper.GetString("server.max_lag"); str != "" {
 			d, err := time.ParseDuration(str)
 			if err != nil {
-				log.Fatal(err)
+				log.Fatal().Err(err).Send()
 			}
 			cfg.MaxLag = d
 		}

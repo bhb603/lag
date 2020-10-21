@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"log"
 	"strings"
 
+	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -37,7 +37,7 @@ func initConfig() {
 		// if a cfgFile was provided via flag, load that
 		viper.SetConfigFile(cfgFile)
 		if err := viper.ReadInConfig(); err != nil {
-			log.Fatal(err)
+			log.Fatal().Err(err).Send()
 		}
 	} else {
 		// otherwise try some default locations
